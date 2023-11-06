@@ -45,8 +45,13 @@ const Login = () => {
             }
             )
             .catch(error => {
-                console.log(error)
-            })
+                Swal.fire({
+                    title: 'Warning!',
+                    text: `${error.message}`,
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                })
+            });
     }
     return (
         <div className="hero min-h-screen">

@@ -1,19 +1,28 @@
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddAssignment = () => {
+    const {user, setUserLocation} = useContext(AuthContext)
+    const location = useLocation()
+    const State = location?.state
+    setUserLocation(State)
+    const navigate = useNavigate()
 
-    const addProduct = e => {
+    const addAssignment = e => {
         e.preventDefault();
         const form = e.target;
         const title = form.title?.value;
         const date = form.date?.value;
         const level = form.level?.value;
-        const marks = form.marks.value;
+        const marks = "pending";
         const photo = form.photo.value;
         const pdf = form.pdf.value;
         const description = form.description.value;
+        const email = user?.email;
 
-        const assignment = { title, date, level, marks, photo, pdf, description }
+        const assignment = { email, title, date, level, marks, photo, pdf, description }
         console.log(assignment);
 
         fetch(`http://localhost:5000/assignments`, {
@@ -33,6 +42,7 @@ const AddAssignment = () => {
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     })
+                    navigate(location?.state ? State : "/assignments")
                 }
             })
             .catch(err =>{
@@ -49,7 +59,7 @@ const AddAssignment = () => {
     return (
         <div className="md:p-24 bg-[url('https://i.ibb.co/Fg9F0Fw/banner-add-ass.jpg')] mx-auto bg-center bg-cover bg-blend-overlay bg-[#000] bg-opacity-10 py-8">
             <h2 className="text-3xl font-extrabold text-white mb-5 text-center">Create Assignment</h2>
-            <form onSubmit={addProduct} className='w-11/12 md:w-full mx-auto'>
+            <form onSubmit={addAssignment} className='w-11/12 md:w-full mx-auto'>
                 <div className="md:flex md:md:mb-8 justify-between">
                     <div className="form-control md:w-[48%]">
                         <span className="label-text text-white text-lg">Assignment Title</span>
@@ -68,7 +78,7 @@ const AddAssignment = () => {
                     </div>
                     <div className="form-control md:w-[48%]">
                         <span className="label-text text-white text-lg">Difficulty level</span>
-                        <select name="level" required id="" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white">
+                        <select name="level" required id="" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-gray-500">
                             <option value="Easy">Easy</option>
                             <option value="Medium">Medium</option>
                             <option value="Hard">Hard</option>
@@ -80,18 +90,18 @@ const AddAssignment = () => {
                 <div className="md:flex md:mb-8 justify-between">
                     <div className="form-control md:w-[48%]">
                         <span className="label-text text-white text-lg">PDF Link</span>
-                        <input type="file" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" name="pdf" placeholder="Enter PDF Link" id="" />
+                        <input type="text" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" name="pdf" placeholder="Enter PDF Link" id="" required/>
 
                     </div>
                     <div className="form-control md:w-[48%]">
                         <span className="label-text text-white text-lg">Marks</span>
-                        <input type="number" name="marks" placeholder="Enter Marks" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" required />
+                        <input type="number" name="marks" placeholder="Enter Marks" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" value={'pending'}/>
                     </div>
                 </div>
 
                 <div className="md:mb-8">
                     <span className="label-text text-white text-lg">Description</span>
-                    <textarea className='p-3 w-full rounded-lg bg-opacity-0 border border-[#009fe2] mt-2 text-white bg-white' placeholder='Enter Description' name="description" id="" cols="" rows="6"></textarea>
+                    <textarea className='p-3 w-full rounded-lg bg-opacity-0 border border-[#009fe2] mt-2 text-white bg-white' placeholder='Enter Description' name="description" id="" cols="" rows="6" required></textarea>
                 </div>
 
                 <input type="submit" value="Add Assignments" className="btn btn-block bg-[#1536f0d4] text-white text-xl border mt-3 border-[#2c2cff] hover:text-[#2c2cff] hover:bg-white" />

@@ -5,6 +5,7 @@ import Assignments from "../Components/Assignments/Assignments";
 import AddAssignment from "../Components/CURD/AddAssignment";
 import Login from "../Components/Create&Login/Login";
 import CreateUser from "../Components/Create&Login/CreateUser";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
         },
         {
           path:"/create-assignment",
-          element:<AddAssignment></AddAssignment>
+          element:<PrivateRoute><AddAssignment></AddAssignment></PrivateRoute>
         }
       ]
     },

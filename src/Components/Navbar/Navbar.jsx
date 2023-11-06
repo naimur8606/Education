@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
 import { BsPerson, BsPersonX } from "react-icons/bs";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -12,8 +13,22 @@ const Navbar = () => {
     console.log(user)
     const SignOut = () => {
         logOut()
-        .then()
-        .catch()
+        .then(
+            Swal.fire({
+                title: 'Success!',
+                text: 'User Created Successfully',
+                icon: 'success',
+                confirmButtonText: 'Yaaah'
+            })
+        )
+        .catch(error => {
+            Swal.fire({
+                title: 'Warning!',
+                text: `${error.message}`,
+                icon: 'warning',
+                confirmButtonText: 'Ok'
+            })
+        });
     }
 
     return (

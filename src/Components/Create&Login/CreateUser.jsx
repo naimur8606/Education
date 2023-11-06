@@ -1,25 +1,25 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { signOut } from "firebase/auth";
 import auth from "../../Providers/Firebase/FirebaseConfig";
 import Swal from "sweetalert2";
 
 const CreateUser = () => {
-    const { createUser} = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
     const [useAlert, setUseAlert] = useState(true)
     const navigate = useNavigate()
     const formSubmit = e => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        if(!/^(?=.*[a-z])(?!.*[A-Z])(?=.*[0-9]).{6,}$/.test(password)){
+        if (!/^(?=.*[a-z])(?!.*[A-Z])(?=.*[0-9]).{6,}$/.test(password)) {
             return console.log("error")
         }
 
         createUser(email, password)
-            .then(()=>{
+            .then(() => {
                 signOut(auth)
                 const user = { email, cartProduct: [] };
                 fetch(`https://sob-dokander-server.vercel.app/user`, {
@@ -46,8 +46,14 @@ const CreateUser = () => {
                 }
                 navigate("/login")
             })
-            .catch(error =>
-                {console.log(error)});
+            .catch(error => {
+                Swal.fire({
+                    title: 'Warning!',
+                    text: `${error.message}`,
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                })
+            });
     };
     return (
         <div className="hero min-h-screen">
@@ -73,8 +79,8 @@ const CreateUser = () => {
                         </div>
                     </form>
                     <div className="p-8">
-                    <p className="text-xl">Have already account <Link to={"/login"} className="text-blue-600 underline">Login</Link></p>
-                    <SocialLogin></SocialLogin>
+                        <p className="text-xl">Have already account <Link to={"/login"} className="text-blue-600 underline">Login</Link></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
