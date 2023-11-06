@@ -10,30 +10,40 @@ const AddAssignment = () => {
         const level = form.level?.value;
         const marks = form.marks.value;
         const photo = form.photo.value;
+        const pdf = form.pdf.value;
         const description = form.description.value;
 
-        const product = { title, date, level, marks, photo, description }
-        console.log(product);
+        const assignment = { title, date, level, marks, photo, pdf, description }
+        console.log(assignment);
 
-        // fetch(`https://sob-dokander-server.vercel.app/products`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(product)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.insertedId) {
-        //             Swal.fire({
-        //                 title: 'Success!',
-        //                 text: 'Product Added Successfully',
-        //                 icon: 'success',
-        //                 confirmButtonText: 'Cool'
-        //             })
-        //         }
-        //     })
+        fetch(`http://localhost:5000/assignments`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(assignment)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Product Added Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+            })
+            .catch(err =>{
+                Swal.fire({
+                    title: 'Success!',
+                    text: `${err.message}`,
+                    icon: 'warning',
+                    confirmButtonText: 'Cool'
+                })
+            }
+            )
     }
 
     return (
@@ -70,7 +80,7 @@ const AddAssignment = () => {
                 <div className="md:flex md:mb-8 justify-between">
                     <div className="form-control md:w-[48%]">
                         <span className="label-text text-white text-lg">PDF Link</span>
-                        <input type="text" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" name="pdf" placeholder="Enter PDF Link" id="" />
+                        <input type="file" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" name="pdf" placeholder="Enter PDF Link" id="" />
 
                     </div>
                     <div className="form-control md:w-[48%]">

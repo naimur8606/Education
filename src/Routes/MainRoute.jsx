@@ -3,7 +3,8 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Components/Home/Home";
 import Assignments from "../Components/Assignments/Assignments";
 import AddAssignment from "../Components/CURD/AddAssignment";
-// import Login from "../Components/Create&Login/Login";
+import Login from "../Components/Create&Login/Login";
+import CreateUser from "../Components/Create&Login/CreateUser";
 
 const router = createBrowserRouter([
     {
@@ -24,10 +25,14 @@ const router = createBrowserRouter([
         }
       ]
     },
-    // {
-    //     path:"/login",
-    //     element: <Login></Login>
-    // }
+    {
+        path:"/login",
+        element: <Login></Login>
+    },
+    {
+        path:"/registration",
+        element: <CreateUser></CreateUser>
+    }
   ]);
 
   export default router;

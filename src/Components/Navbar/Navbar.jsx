@@ -1,11 +1,20 @@
+import { useContext, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { BiMenu } from 'react-icons/bi';
-import { AiOutlineClose } from 'react-icons/ai';
-import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BiMenu } from "react-icons/bi";
+import { BsPerson, BsPersonX } from "react-icons/bs";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
     const [menu, setMenu] = useState(false)
     const location = useLocation().pathname;
+    console.log(user)
+    const SignOut = () => {
+        logOut()
+        .then()
+        .catch()
+    }
 
     return (
         <div className="w-11/12 mx-auto">
@@ -45,13 +54,22 @@ const Navbar = () => {
                         Add Assignments
                     </NavLink>}
                     
-                    <NavLink
-                        to={"/login"}
-                        className={({ isActive, isPending }) =>
-                            isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
-                        }>
-                        Login
-                    </NavLink>
+                    
+                        {user ?
+                            <div className="flex items-center">
+                                <BsPerson className="text-2xl mr-1.5"></BsPerson><button onClick={SignOut}>Logout</button>
+                            </div> :
+                            <div className="flex items-center"><BsPersonX className="text-2xl mr-1.5"></BsPersonX>
+                                <NavLink
+                                    to="/login"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "text-[#2c2cff] border border-[#2c2cff] px-3 py-1 rounded-md" : ""
+                                    }>
+                                    Login
+                                </NavLink>
+                            </div>
+                        }
+                    
                 </ul>
             </div>
         </div>
