@@ -36,7 +36,7 @@ const Navbar = () => {
                         Assignments
                     </NavLink>
 
-                    {location === "/assignments" && <NavLink
+                    {location === "/" || <NavLink
                         onClick={() => setMenu(false)}
                         to={"/create-assignment"}
                         className={({ isActive, isPending }) =>
