@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { BiMenu } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from "react";
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false)
+    const location = useLocation().pathname;
 
     return (
         <div className="w-11/12 mx-auto">
@@ -35,6 +36,15 @@ const Navbar = () => {
                         Assignments
                     </NavLink>
 
+                    {location === "/assignments" && <NavLink
+                        onClick={() => setMenu(false)}
+                        to={"/create-assignment"}
+                        className={({ isActive, isPending }) =>
+                            isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
+                        }>
+                        Add Assignments
+                    </NavLink>}
+                    
                     <NavLink
                         to={"/login"}
                         className={({ isActive, isPending }) =>
