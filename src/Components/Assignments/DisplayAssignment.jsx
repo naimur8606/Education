@@ -1,8 +1,12 @@
 
-const DisplayAssignment = () => {
+const DisplayAssignment = ({assignments}) => {
     return (
-        <div className="h-screen">
-            
+        <div className="">
+            {
+                assignments?.map((assignment, idx) =>
+                <img key={idx} src={assignment?.photo} alt="" />
+                )
+            }
         </div>
     );
 };
