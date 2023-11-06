@@ -29,7 +29,7 @@ const Feature = () => {
                 <h3 className="text-2xl md:text-3xl font-semibold">Submitted Assignments</h3>
                 <p className="feature-description">Access and review assignments submitted by users, provide feedback, and track completion status.</p>
                 <div>
-                    <Link to={"/manage-assignment"} className='text-xl py-2 px-6 text-white bg-[#009fe2] rounded-lg'>Manage</Link>
+                    <Link to={"/manage-assignments"} className='text-xl py-2 px-6 text-white bg-[#009fe2] rounded-lg'>Manage</Link>
                 </div>
             </div>
         </div>

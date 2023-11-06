@@ -7,7 +7,10 @@ const Assignments = () => {
     return (
         <div>
             <Banner></Banner>
+            <div className='w-11/12 mx-auto my-8'>
+                <h2 className="text-2xl font-semibold my-2">All Assignments are here</h2>
             <DisplayAssignment assignments={assignments}></DisplayAssignment>
+            </div>
             
         </div>
     );

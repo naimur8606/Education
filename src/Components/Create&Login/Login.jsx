@@ -55,8 +55,8 @@ const Login = () => {
     }
     return (
         <div className="hero min-h-screen">
-            <div className="hero-content w-[450px] flex-col lg:flex-row-reverse">
-                <img src="https://i.ibb.co/RbR1q6G/login-cover2.webp" alt="" />
+            <div className="hero-content w-full md:w-[450px] flex-col lg:flex-row-reverse">
+                <img className="w-full" src="https://i.ibb.co/RbR1q6G/login-cover2.webp" alt="" />
                 <div className="card flex-shrink-0 w-full  shadow-2xl ">
                     <h1 className="text-center text-5xl font-bold">Login now!</h1>
                     <form onSubmit={formSubmit} className="card-body">
