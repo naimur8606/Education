@@ -60,16 +60,35 @@ const Navbar = () => {
                         Assignments
                     </NavLink>
 
-                    {
-                        location === "/" || <NavLink
-                            onClick={() => setMenu(false)}
-                            to={"/create-assignment"}
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
-                            }>
-                            Add Assignments
-                        </NavLink>
-                    }
+                    <div className="dropdown dropdown-bottom">
+                        <label tabIndex={0} className="">All Features</label>
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 bg-blue-800 bg-opacity-40 shadow rounded-box w-52">
+                            <li><NavLink
+                                onClick={() => setMenu(false)}
+                                to={"/create-assignment"}
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
+                                }>
+                                Add Assignments
+                            </NavLink></li>
+                            <li><NavLink
+                                onClick={() => setMenu(false)}
+                                to={`/my-assignment/${user?.email}`}
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
+                                }>
+                                My Assignments
+                            </NavLink></li>
+                            <li><NavLink
+                                onClick={() => setMenu(false)}
+                                to={`/manage-assignment/${user?.email}`}
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
+                                }>
+                                Submitted Assignments
+                            </NavLink></li>
+                        </ul>
+                    </div>
                     {user ?
                         <div className="flex items-center">
                             <BsPerson className="text-2xl mr-1.5"></BsPerson><button onClick={SignOut}>Logout</button>

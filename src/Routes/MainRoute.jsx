@@ -7,6 +7,8 @@ import Login from "../Components/Create&Login/Login";
 import CreateUser from "../Components/Create&Login/CreateUser";
 import PrivateRoute from "./PrivateRoute";
 import Assignment from "../Components/Assignments/Assignment";
+import MyAssignments from "../Components/MyAssignments/MyAssignments";
+import ManageAssignment from "../Components/ManageAssignments/ManageAssignment";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +32,16 @@ const router = createBrowserRouter([
         {
           path:"/create-assignment",
           element:<PrivateRoute><AddAssignment></AddAssignment></PrivateRoute>
+        },
+        {
+          path:"/manage-assignment/:email",
+          element:<PrivateRoute><ManageAssignment></ManageAssignment></PrivateRoute>,
+          loader: ({params})=> fetch(`http://localhost:5000/assignments/manage-assignments/${params?.email}`)
+        },
+        {
+          path:"/my-assignment/:email",
+          element:<PrivateRoute><MyAssignments></MyAssignments></PrivateRoute>,
+          loader:({params})=>fetch(`http://localhost:5000/assignments/my-assignments/${params?.email}`)
         }
       ]
     },
