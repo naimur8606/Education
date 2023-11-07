@@ -17,7 +17,7 @@ const Assignment = () => {
         const title = assignment?.title;
         const marks = assignment?.marks;
         const level = assignment?.level;
-        const achieveMarks = '';
+        const achieveMarks = 'pending';
         const photo = assignment?.photo;
         const pdf = form.pdf.value;
         const note = form.note.value;

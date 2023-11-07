@@ -39,9 +39,9 @@ const router = createBrowserRouter([
         element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>
       },
       {
-        path: "/manage-assignment/:email",
+        path: "/manage-assignment",
         element: <PrivateRoute><ManageAssignment></ManageAssignment></PrivateRoute>,
-        loader: () => fetch(`http://localhost:5000/takeAssignments`)
+        loader: () => fetch(`http://localhost:5000/takeAssignments/pending`)
       },
       {
         path: "/my-assignment",

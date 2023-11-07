@@ -15,7 +15,7 @@ const DisplayAssignment = ({ assignments }) => {
                                 <h3 className="text-2xl font-medium">{assignment?.title}</h3>
                                 <h5 className="font-semibold">{assignment?.date}</h5>
                             </div>
-                            <p>{assignment?.description.slice(0, 45)}...</p>
+                            <p>{assignment?.description}...</p>
                             <div className="pt-3 flex justify-between items-center">
                                 <Link to={`/assignments/${assignment?._id}`} className="text-xl text-white bg-[#009fe2] px-6 py-2 rounded-lg">View Assignment</Link>
                                 <div className="dropdown dropdown-bottom">

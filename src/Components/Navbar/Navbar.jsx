@@ -81,7 +81,7 @@ const Navbar = () => {
                             </NavLink></li>
                             <li><NavLink
                                 onClick={() => setMenu(false)}
-                                to={`/manage-assignment/${user?.email}`}
+                                to={`/manage-assignment`}
                                 className={({ isActive, isPending }) =>
                                     isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
                                 }>
