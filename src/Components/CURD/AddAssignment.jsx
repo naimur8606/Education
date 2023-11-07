@@ -47,10 +47,10 @@ const AddAssignment = () => {
             })
             .catch(err =>{
                 Swal.fire({
-                    title: 'Success!',
+                    title: 'Warning!',
                     text: `${err.message}`,
                     icon: 'warning',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
             }
             )
@@ -89,7 +89,7 @@ const AddAssignment = () => {
 
                 <div className="md:flex md:mb-8 justify-between">
                     <div className="form-control md:w-[48%]">
-                        <span className="label-text text-white text-lg">PDF Link</span>
+                        <span className="label-text text-white text-lg">PDF Source</span>
                         <input type="text" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2 text-white" name="pdf" placeholder="Enter PDF Link" id="" required/>
 
                     </div>

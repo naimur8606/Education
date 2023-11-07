@@ -56,7 +56,7 @@ const navigate = useNavigate()
             })
             .catch(err =>{
                 Swal.fire({
-                    title: 'Success!',
+                    title: 'Warning!',
                     text: `${err.message}`,
                     icon: 'warning',
                     confirmButtonText: 'Cool'

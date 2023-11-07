@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/manage-assignment/:email",
         element: <PrivateRoute><ManageAssignment></ManageAssignment></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/assignments/manage-assignments/${params?.email}`)
+        loader: () => fetch(`http://localhost:5000/takeAssignments`)
       },
       {
         path: "/my-assignment",
