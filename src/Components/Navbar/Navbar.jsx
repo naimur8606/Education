@@ -73,7 +73,7 @@ const Navbar = () => {
                             </NavLink></li>
                             <li><NavLink
                                 onClick={() => setMenu(false)}
-                                to={`/my-assignment/${user?.email}`}
+                                to={`/my-assignment`}
                                 className={({ isActive, isPending }) =>
                                     isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
                                 }>
@@ -89,6 +89,7 @@ const Navbar = () => {
                             </NavLink></li>
                         </ul>
                     </div>
+
                     {user ?
                         <div className="flex items-center">
                             <BsPerson className="text-2xl mr-1.5"></BsPerson><button onClick={SignOut}>Logout</button>
