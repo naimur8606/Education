@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { pdfjs } from 'react-pdf';
 import PdfViewer from "../PdfViewer/PdfViewer";
 import Swal from "sweetalert2";
@@ -14,7 +14,7 @@ const ManageAssignment = () => {
     const [allAssignments, setAllAssignments] = useState(assignments)
     // console.log(assignments)
     const [markedAssignment, setMarkedAssignment] = useState({})
-    const filterAssignments = allAssignments?.filter(item => item?._id ==! markedAssignment?._id)
+    const filterAssignments = allAssignments?.filter(item => item?._id !== markedAssignment?._id)
 
     const updateMarks = e => {
         e.preventDefault();
@@ -30,7 +30,7 @@ const ManageAssignment = () => {
         const assignment = { title, email, achieveMarks, note, level, marks, photo, pdf }
         console.log(assignment, markedAssignment?._id)
 
-        fetch(`http://localhost:5000/takeAssignments/${markedAssignment?._id}`, {
+        fetch(`https://friends-communication-server.vercel.app/takeAssignments/${markedAssignment?._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

@@ -15,7 +15,7 @@ const navigate = useNavigate()
     // console.log(id)
     // console.log(assignment)
     useEffect(()=>{
-        axios.get(`http://localhost:5000/assignments/${id}`)
+        axios.get(`https://friends-communication-server.vercel.app/assignments/${id}`)
         .then(data => setAssignment(data?.data))
     },[id])
 
@@ -34,7 +34,7 @@ const navigate = useNavigate()
         const assignment = { email, title, date, level, marks, photo, pdf, description }
         console.log(assignment);
 
-        fetch(`http://localhost:5000/assignments/${id}`, {
+        fetch(`https://friends-communication-server.vercel.app/assignments/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

@@ -18,17 +18,18 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home></Home>
+        element: <Home></Home>,
+        loader: ()=> fetch(`https://friends-communication-server.vercel.app/assignments?page=${0}&size=${9}`)
       },
       {
         path: "/assignments",
         element: <Assignments></Assignments>,
-        loader: () => fetch("http://localhost:5000/assignments")
+        loader: () => fetch("https://friends-communication-server.vercel.app/assignmentsCount")
       },
       {
         path: "/assignments/:id",
         element: <Assignment></Assignment>,
-        loader: ({ params }) => fetch(`http://localhost:5000/assignments/${params?.id}`)
+        loader: ({ params }) => fetch(`https://friends-communication-server.vercel.app/assignments/${params?.id}`)
       },
       {
         path: "/create-assignment",
@@ -41,12 +42,12 @@ const router = createBrowserRouter([
       {
         path: "/manage-assignment",
         element: <PrivateRoute><ManageAssignment></ManageAssignment></PrivateRoute>,
-        loader: () => fetch(`http://localhost:5000/takeAssignments/pending`)
+        loader: () => fetch(`https://friends-communication-server.vercel.app/takeAssignments/pending`)
       },
       {
         path: "/my-assignment",
         element: <PrivateRoute><MyAssignments></MyAssignments></PrivateRoute>,
-        // loader: ({ params }) => fetch(`http://localhost:5000/assignments/my-assignments/${params?.email}`)
+        // loader: ({ params }) => fetch(`https://friends-communication-server.vercel.app/assignments/my-assignments/${params?.email}`)
       }
     ]
   },

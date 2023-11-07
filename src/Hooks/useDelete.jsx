@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 const useDelete = () => {
     const navigate = useNavigate()
     const deleteData = (id) => {
-      return fetch(`http://localhost:5000/assignments/${id}`, {
+      return fetch(`https://friends-communication-server.vercel.app/assignments/${id}`, {
         method: 'DELETE'
       })
         .then((res) => res.json())

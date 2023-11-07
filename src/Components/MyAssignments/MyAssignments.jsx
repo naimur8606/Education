@@ -10,7 +10,7 @@ const MyAssignments = () => {
     const [assignments, setAssignments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        axios.get(`http://localhost:5000/assignments/my-assignments/${user?.email}`)
+        axios.get(`https://friends-communication-server.vercel.app/assignments/my-assignments/${user?.email}`)
             .then(data => {
                 setAssignments(data?.data)
                 setIsLoading(false);
@@ -35,8 +35,15 @@ const MyAssignments = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-11/12 mx-auto my-8">
-                <DisplayAssignment assignments={assignments}></DisplayAssignment>
+            <div className="w-11/12 mx-auto min-h-[50vh] my-8">
+                {
+                    assignments.length > 0 ? 
+                    <DisplayAssignment assignments={assignments}></DisplayAssignment>
+                    :
+                    <div className="w-11/12 mx-auto flex justify-center items-center text-black">
+                        <h2>Your Are note Publish any Assignment</h2>
+                    </div>
+                }
             </div>
         </div>
     );

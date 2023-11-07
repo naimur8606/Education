@@ -25,7 +25,7 @@ const AddAssignment = () => {
         const assignment = { email, title, date, level, marks, photo, pdf, description }
         console.log(assignment);
 
-        fetch(`http://localhost:5000/assignments`, {
+        fetch(`https://friends-communication-server.vercel.app/assignments`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

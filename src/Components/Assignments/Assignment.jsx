@@ -26,7 +26,7 @@ const Assignment = () => {
         const takeAssignment = { title, email, achieveMarks, note, level, marks, photo, pdf }
         console.log(takeAssignment);
 
-        fetch(`http://localhost:5000/takeAssignments`, {
+        fetch(`https://friends-communication-server.vercel.app/takeAssignments`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Assignment = () => {
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     })
-                    navigate("/")
+                    navigate("/assignments")
                 }
             })
             .catch(err => {
@@ -61,8 +61,8 @@ const Assignment = () => {
     return (
         <div className="w-11/12 mx-auto">
             <div className="">
-                <img className="h-[90vh] w-full" src={assignment?.photo} alt="" />
-                <div className="py-5 space-y-2">
+                <img className="h-[40vh] md:h-[300px] lg:h-[90vh] w-full" src={assignment?.photo} alt="" />
+                <div className="py-5 space-y-2 min-h-[50vh]">
                     <div className="flex justify-between items-center">
                         <h3 className="text-3xl font-semibold">{assignment?.title}</h3>
                         <h5 className="font-semibold">Date: {assignment?.date}</h5>

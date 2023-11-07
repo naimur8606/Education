@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
 import { BsPerson, BsPersonX } from "react-icons/bs";
@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [menu, setMenu] = useState(false)
-    const location = useLocation().pathname;
     console.log(user)
     const SignOut = () => {
         logOut()
