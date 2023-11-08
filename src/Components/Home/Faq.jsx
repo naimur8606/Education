@@ -7,7 +7,7 @@ const Faq = () => {
             <img className='w-full lg:w-1/2' src={faq} alt="" />
             <div className="w-full lg:w-1/2 join join-vertical">
                 <div className="collapse collapse-arrow join-item border border-base-300">
-                    <input type="radio" name="my-accordion-4" checked="checked" />
+                    <input type="radio" name="my-accordion-4"/>
                     <div className="collapse-title text-xl font-medium">
                     How do I get started ?
                     </div>

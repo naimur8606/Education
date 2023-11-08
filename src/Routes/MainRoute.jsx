@@ -10,11 +10,14 @@ import Assignment from "../Components/Assignments/Assignment";
 import MyAssignments from "../Components/MyAssignments/MyAssignments";
 import ManageAssignment from "../Components/ManageAssignments/ManageAssignment";
 import UpdateAssignment from "../Components/CURD/UpdateAssignment";
+import ErrorPage from "../Components/Error/ErrorPage";
+import TakenAssignments from "../Components/TakenAssignments/TakenAssignments";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "",
@@ -28,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/assignments/:id",
-        element: <Assignment></Assignment>,
+        element: <PrivateRoute><Assignment></Assignment></PrivateRoute>,
         loader: ({ params }) => fetch(`https://friends-communication-server.vercel.app/assignments/${params?.id}`)
       },
       {
@@ -42,12 +45,15 @@ const router = createBrowserRouter([
       {
         path: "/manage-assignment",
         element: <PrivateRoute><ManageAssignment></ManageAssignment></PrivateRoute>,
-        loader: () => fetch(`https://friends-communication-server.vercel.app/takeAssignments/pending`)
       },
       {
-        path: "/my-assignment",
+        path: "/takenAssignment",
+        element: <PrivateRoute><TakenAssignments></TakenAssignments></PrivateRoute>,
+      },
+      {
+        path: "/my-assignment/:email",
         element: <PrivateRoute><MyAssignments></MyAssignments></PrivateRoute>,
-        // loader: ({ params }) => fetch(`https://friends-communication-server.vercel.app/assignments/my-assignments/${params?.email}`)
+        loader: ({ params }) => fetch(`https://friends-communication-server.vercel.app/assignments/my-assignmentsCount?email=${params?.email}`)
       }
     ]
   },

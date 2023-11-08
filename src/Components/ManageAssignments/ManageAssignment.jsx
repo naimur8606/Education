@@ -1,8 +1,8 @@
-import { useLoaderData } from "react-router-dom";
 import { pdfjs } from 'react-pdf';
 import PdfViewer from "../PdfViewer/PdfViewer";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from '../../Providers/AuthProvider';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -10,13 +10,18 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 const ManageAssignment = () => {
-    const assignments = useLoaderData()
-    const [allAssignments, setAllAssignments] = useState(assignments)
+    const { user } = useContext(AuthContext)
+    const [allAssignments, setAllAssignments] = useState([])
+    useEffect(() => {
+        fetch(`https://friends-communication-server.vercel.app/takeAssignments/pending?email=${user?.email}`, { credentials: 'include' })
+            .then(res => res.json())
+            .then(data => setAllAssignments(data))
+    }, [user])
     // console.log(assignments)
     const [markedAssignment, setMarkedAssignment] = useState({})
-    const filterAssignments = allAssignments?.filter(item => item?._id !== markedAssignment?._id)
 
     const updateMarks = e => {
+        const filterAssignments = allAssignments?.filter(item => item?._id !== markedAssignment?._id)
         e.preventDefault();
         const form = e.target;
         const title = markedAssignment?.title;
@@ -107,7 +112,7 @@ const ManageAssignment = () => {
                                         <td>
                                             <form onSubmit={updateMarks} className="space-y-2">
                                                 <input type="number" name="marks" placeholder="Enter Marks" className="input input-bordered w-full bg-opacity-0 border border-[#009fe2] mt-2" />
-                                                <button type="submit" onClick={()=> setMarkedAssignment(item)} className="btn">Submit</button>
+                                                <button type="submit" onClick={() => setMarkedAssignment(item)} className="btn">Submit</button>
                                             </form>
 
                                         </td>

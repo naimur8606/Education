@@ -18,8 +18,8 @@ const Login = () => {
         const password = e.target.password.value
         userLogin(email, password)
             .then(() => {
-                const user = { email, cartProduct: [] };
-                fetch(`https://sob-dokander-server.vercel.app/user`, {
+                const user = { email };
+                fetch(`https://friends-communication-server.vercel.app/user`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

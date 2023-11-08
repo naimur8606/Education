@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { AiFillGithub, AiFillGoogleCircle, AiFillGooglePlusSquare } from "react-icons/ai";
+import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
@@ -13,8 +13,8 @@ const SocialLogin = () => {
         media()
             .then((req) => {
                 const email = req?.user?.email;
-                const user = { email, cartProduct: [] };
-                fetch(`https://sob-dokander-server.vercel.app/user`, {
+                const user = { email };
+                fetch(`https://friends-communication-server.vercel.app/user`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -21,8 +21,8 @@ const CreateUser = () => {
         createUser(email, password)
             .then(() => {
                 signOut(auth)
-                const user = { email, cartProduct: [] };
-                fetch(`https://sob-dokander-server.vercel.app/user`, {
+                const user = { email };
+                fetch(`https://friends-communication-server.vercel.app/user`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GithubAuthProvider } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "./Firebase/FirebaseConfig";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
@@ -38,12 +39,30 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(currentUser);
+            console.log('current user', currentUser);
             setLoading(false);
+            // if user exists then issue a token
+            if (currentUser) {
+                axios.post('https://friends-communication-server.vercel.app/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log('token response', res.data);
+                    })
+            }
+            else {
+                axios.post('https://friends-communication-server.vercel.app/logout', loggedUser, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            }
         });
         return () => {
-            unSubscribe();
+            return unsubscribe();
         }
     }, [])
 

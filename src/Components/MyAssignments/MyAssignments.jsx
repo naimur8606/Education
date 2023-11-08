@@ -2,15 +2,15 @@ import DisplayAssignment from "../Assignments/DisplayAssignment";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
 const MyAssignments = () => {
+    console.log(useLoaderData())
     const {user} = useContext(AuthContext)
-    // console.log(userEmail)
-    // const assignments = useLoaderData()
     const [assignments, setAssignments] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        axios.get(`https://friends-communication-server.vercel.app/assignments/my-assignments/${user?.email}`)
+        axios.get(`https://friends-communication-server.vercel.app/assignments/my-assignments?email=${user?.email}`, { withCredentials: true })
             .then(data => {
                 setAssignments(data?.data)
                 setIsLoading(false);
@@ -40,8 +40,8 @@ const MyAssignments = () => {
                     assignments.length > 0 ? 
                     <DisplayAssignment assignments={assignments}></DisplayAssignment>
                     :
-                    <div className="w-11/12 mx-auto flex justify-center items-center text-black">
-                        <h2>Your Are note Publish any Assignment</h2>
+                    <div className="w-11/12 mx-auto flex text-2xl justify-center items-center text-black">
+                        <h2>You have not published any assignments !</h2>
                     </div>
                 }
             </div>

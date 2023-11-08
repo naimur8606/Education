@@ -72,7 +72,7 @@ const Navbar = () => {
                             </NavLink></li>
                             <li><NavLink
                                 onClick={() => setMenu(false)}
-                                to={`/my-assignment`}
+                                to={`/my-assignment/${user?.email}`}
                                 className={({ isActive, isPending }) =>
                                     isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
                                 }>
@@ -85,6 +85,14 @@ const Navbar = () => {
                                     isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
                                 }>
                                 Submitted Assignments
+                            </NavLink></li>
+                            <li><NavLink
+                                onClick={() => setMenu(false)}
+                                to={`/takenAssignment`}
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "border-b-2 border-[#fff] md:border-[#009fe2] px-2 rounded-md" : ""
+                                }>
+                                Taken Assignments
                             </NavLink></li>
                         </ul>
                     </div>

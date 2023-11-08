@@ -7,6 +7,7 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 const Assignments = () => {
     const { count } = useLoaderData()
     const totalPages = Math.ceil(count / 8)
+    console.log(totalPages)
     const pages = [...Array(totalPages).keys()];
     console.log(pages)
     const [currentPage, setCurrentPage] = useState(0)
